@@ -190,18 +190,20 @@ darkStyles.innerHTML = `
     }
 
     table {
+        font-family: system-ui, sans-serif !important;
         border-radius: 1rem !important;
         overflow: hidden !important;
+        border-collapse: collapse !important;
     }
 
-    tr:first-child {
-        background-color: #222 !important;
+    tr:nth-child(2n+1),
+    tr:nth-child(2n+1) td {
+        background-color: #333 !important;
     }
     
     table,
     table * {
         padding: 1rem !important;
-        background-color: #333 !important;
     }
 
     .btn {
@@ -277,10 +279,6 @@ function do_da_favicon_and_the_title_thing() {
     document.querySelector("head").appendChild(favicon);
 }
 
-if (/^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href)) {
-    do_da_course_clickable_thing();
-}
-
 if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
     const welcome = document.querySelector(".welcome");
     welcome.style.position = "fixed";
@@ -302,6 +300,10 @@ if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
         <div class="themBullets">
             ${themHTML}
         </div>`;
+}
+
+if (/^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href)) {
+    do_da_course_clickable_thing();
 }
 
 do_da_favicon_and_the_title_thing();
