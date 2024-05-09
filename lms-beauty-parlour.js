@@ -240,18 +240,21 @@ async function do_da_course_clickable_thing() {
     }
 }
 
+function do_da_favicon_and_the_title_thing() {
+    if (document.querySelector(".page-header-headings h1"))
+        document.title = `${document.querySelector(".page-header-headings h1").textContent}`;
+
+    const favicon = document.createElement("link");
+    favicon.setAttribute("rel", "shortcut icon");
+    favicon.setAttribute("type", "image/x-icon");
+    favicon.setAttribute(
+        "href",
+        document.querySelector(".avatars img")?.src ??
+            "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♥️</text></svg>"
+    );
+    document.querySelector("head").appendChild(favicon);
+}
+
 do_da_course_clickable_thing();
+do_da_favicon_and_the_title_thing();
 document.querySelector("head").appendChild(darkStyles);
-
-if (document.querySelector(".page-header-headings h1"))
-    document.title = `${document.querySelector(".page-header-headings h1").textContent}`;
-
-const favicon = document.createElement("link");
-favicon.setAttribute("rel", "shortcut icon");
-favicon.setAttribute("type", "image/x-icon");
-favicon.setAttribute(
-    "href",
-    document.querySelector(".avatars img")?.src ??
-        "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♥️</text></svg>"
-);
-document.querySelector("head").appendChild(favicon);
