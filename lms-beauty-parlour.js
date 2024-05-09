@@ -148,6 +148,10 @@ darkStyles.innerHTML = `
         background-color: #d47b05 !important;
         color: #222 !important;
     }
+
+    form#login > div {
+        margin-block: 1rem !important;
+    }
     
     .btn-secondary {
         background-color: #0058ad !important;
@@ -208,6 +212,22 @@ darkStyles.innerHTML = `
         overflow: hidden !important;
     }
 
+    .themBullets {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    #page-login-index.moove-login #page-wrapper #page .themBullet {
+        background-color: #83264542 !important;
+        backdrop-filter: blur(3px);
+        color: #aaa !important;
+        list-style: none;
+        border-radius: 1rem;
+        padding-block: 1rem;
+        padding-inline: 2rem;
+    }
+
     .userpicture {
         padding: 0 !important
     }
@@ -216,10 +236,7 @@ darkStyles.innerHTML = `
 async function do_da_course_clickable_thing() {
     if (document.querySelector(".page-header-headings h1"))
         document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
-    while (
-        /^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href) &&
-        document.getElementsByClassName("course-summaryitem").length <= 1
-    ) {
+    while (document.getElementsByClassName("course-summaryitem").length <= 1) {
         await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
 
         Array.from(
@@ -263,6 +280,32 @@ function do_da_favicon_and_the_title_thing() {
     document.querySelector("head").appendChild(favicon);
 }
 
-do_da_course_clickable_thing();
+if (/^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href)) {
+    do_da_course_clickable_thing();
+}
+
+if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
+    const welcome = document.querySelector(".welcome");
+    welcome.style.position = "fixed";
+    welcome.style.top = "5%";
+    welcome.style.left = "5%";
+
+    const themBullets = welcome.textContent
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((s) => s);
+
+    let themHTML = "";
+    themBullets.forEach((point, i) => {
+        if (i < 3)
+            themHTML += `<li class="themBullet">${point.replace("* ", "")}</li>\n`;
+    });
+
+    welcome.innerHTML = `
+        <div class="themBullets">
+            ${themHTML}
+        </div>`;
+}
+
 do_da_favicon_and_the_title_thing();
 document.querySelector("head").appendChild(darkStyles);
