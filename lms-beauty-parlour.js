@@ -222,7 +222,6 @@ async function do_da_course_clickable_thing() {
     ) {
         await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
 
-        console.log("ok");
         Array.from(
             document.getElementsByClassName("course-summaryitem")
         ).forEach((element, i) => {
@@ -244,7 +243,7 @@ async function do_da_course_clickable_thing() {
                 `${actualProgress}%`
             );
 
-            progress.setAttribute("data-progress", `${actualProgress}%`);
+            progress?.setAttribute("data-progress", `${actualProgress}%`);
         });
     }
 }
