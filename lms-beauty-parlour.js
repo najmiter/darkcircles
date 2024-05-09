@@ -198,16 +198,22 @@ darkStyles.innerHTML = `
         padding: 1rem !important;
         background-color: #333 !important;
     }
+
+    .userpicture {
+        padding: 0 !important
+    }
 `;
 
 async function do_da_course_clickable_thing() {
-    document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
+    if (document.querySelector(".page-header-headings h1"))
+        document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
     while (
         /^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href) &&
         document.getElementsByClassName("course-summaryitem").length <= 1
     ) {
         await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
 
+        console.log("ok");
         Array.from(
             document.getElementsByClassName("course-summaryitem")
         ).forEach((element, i) => {
@@ -237,10 +243,15 @@ async function do_da_course_clickable_thing() {
 do_da_course_clickable_thing();
 document.querySelector("head").appendChild(darkStyles);
 
-document.title = `${document.querySelector(".page-header-headings h1").textContent}`;
+if (document.querySelector(".page-header-headings h1"))
+    document.title = `${document.querySelector(".page-header-headings h1").textContent}`;
 
 const favicon = document.createElement("link");
 favicon.setAttribute("rel", "shortcut icon");
 favicon.setAttribute("type", "image/x-icon");
-favicon.setAttribute("href", document.querySelector(".avatars img").src);
+favicon.setAttribute(
+    "href",
+    document.querySelector(".avatars img")?.src ??
+        "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♥️</text></svg>"
+);
 document.querySelector("head").appendChild(favicon);
