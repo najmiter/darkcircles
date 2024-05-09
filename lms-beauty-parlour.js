@@ -9,6 +9,7 @@ darkStyles.innerHTML = `
     .course-summaryitem {
         padding: 1rem !important;
         border-radius: 1rem !important;
+        position: relative !important;
     }
     
     .course-summaryitem,
@@ -41,11 +42,29 @@ darkStyles.innerHTML = `
     }
 
     .progress .progress-bar {
-        background-color: #1893ff !important;
+        position: relative;
+    }
+
+    .course-summaryitem > div > div > div:last-child * {
+        display: none !important;
+    }
+
+    .course-summaryitem > div > div > div:last-child::after {
+        content: '';
+        position: absolute !important;
+        right: -45% !important;
+        top: 50% !important;
+        translate: -50% -50% !important;
+        width: 100px !important;
+        aspect-ratio: 1 !important;
+        border-radius: 50% !important;
+
+        background-color: #333 !important;
     }
 
     .block .block-cards .progress {
-        height: 1rem !important;
+        width: 50px !important;
+        aspect-ratio: 1 !important;
         background-color: #686868 !important;
     }
 
@@ -126,17 +145,43 @@ darkStyles.innerHTML = `
         display: flex;
         align-items: center;
     }
-    
+    .course-summaryitem > div > div > div:last-child {
+        --_progress-now: attr(aria-valuenow);
+        position: absolute !important;
+        right: 10% !important;
+        top: 50% !important;
+        translate: -50% -50% !important;
+        width: 105px !important;
+        aspect-ratio: 1 !important;
+        border-radius: 50% !important;
+
+        background-image: conic-gradient(from 0deg, orange var(--_progress-now), transparent 0%); !important;
+        aspect-ratio: 1 !important;
+    }
 `;
 
-document.querySelector("head").appendChild(darkStyles);
+async function do_da_course_clickable_thing() {
+    while (
+        /^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href) &&
+        document.getElementsByClassName("course-summaryitem").length <= 1
+    ) {
+        await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
 
-setTimeout(() => {
-    Array.from(document.getElementsByClassName("course-summaryitem")).forEach(
-        (element) => {
+        Array.from(
+            document.getElementsByClassName("course-summaryitem")
+        ).forEach((element, i) => {
             element.addEventListener("click", (e) =>
-                e.target.querySelector("a").click()
+                e.target.querySelector("a")?.click()
             );
-        }
-    );
-}, 1 * 1000);
+
+            console.log(
+                document.querySelectorAll(
+                    ".course-summaryitem > div > div > div:last-child"
+                )
+            );
+        });
+    }
+}
+
+do_da_course_clickable_thing();
+document.querySelector("head").appendChild(darkStyles);
