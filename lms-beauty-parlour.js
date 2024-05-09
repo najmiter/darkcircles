@@ -17,6 +17,10 @@ darkStyles.innerHTML = `
         display: none !important;
     }
 
+    body {
+        overflow-x: hidden;
+    }
+
     * {
         background-color: #202020 !important;
         color: #e3e3e3 !important;
@@ -173,7 +177,7 @@ darkStyles.innerHTML = `
     }
 
     #page-my-index #page-header,
-    #page-my-index #page-header :is(div, a, h1) {
+    #page-my-index #page-header :is(div, a, h1, form) {
         background-color: #2f2f2f !important;
         z-index: 10 !important;
         backdrop-filter: blur(5rem) !important;
@@ -197,6 +201,11 @@ darkStyles.innerHTML = `
     table * {
         padding: 1rem !important;
         background-color: #333 !important;
+    }
+
+    .btn {
+        border-radius: 10px !important;
+        overflow: hidden !important;
     }
 
     .userpicture {
