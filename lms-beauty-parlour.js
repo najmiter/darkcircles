@@ -28,7 +28,7 @@ darkStyles.innerHTML = `
     }
     
     .course-summaryitem {
-        padding: 2rem 1rem !important;
+        padding: 0 !important;
         border-radius: 1rem !important;
         position: relative !important;
     }
@@ -42,14 +42,11 @@ darkStyles.innerHTML = `
         transition: background-color 250ms ease !important;
     }
 
-    .course-summaryitem:hover {
-        padding: 0 !important;
-    }
     .course-summaryitem:hover * {
         background-color: #1a1a1a !important;
     }
 
-    .course-summaryitem:hover > div {
+    .course-summaryitem > div {
         padding: 2rem 1rem !important;
     }
 
