@@ -1,5 +1,22 @@
 const darkStyles = document.createElement("style");
 darkStyles.innerHTML = `
+    body::after {
+        content: '';
+        width: 25rem;
+        opacity: 0.5;
+        aspect-ratio: 1;
+        background: #5421d8;
+        filter: blur(40rem);
+        pointer-events: none;
+        position: absolute;
+        top: -10%;
+        right: -10%;
+    }
+
+    body#page-login-index::after {
+        display: none !important;
+    }
+
     * {
         background-color: #202020 !important;
         color: #e3e3e3 !important;
@@ -16,6 +33,7 @@ darkStyles.innerHTML = `
     .course-summaryitem * {
         background-color: #2a2a2a !important;
         cursor: pointer;
+        overflow: hidden !important;
 
         transition: background-color 250ms ease !important;
     }
@@ -49,8 +67,26 @@ darkStyles.innerHTML = `
         display: none !important;
     }
 
+    .course-summaryitem > div > div > div:last-child {
+        --_progress-now: 0;
+        position: absolute !important;
+        right: 10% !important;
+        top: 50% !important;
+        translate: -50% -50% !important;
+        width: 105px !important;
+        aspect-ratio: 1 !important;
+        border-radius: 50% !important;
+
+        background-image: conic-gradient(from 0deg, orange var(--_progress-now), transparent 0%); !important;
+        aspect-ratio: 1 !important;
+    }
+
     .course-summaryitem > div > div > div:last-child::after {
-        content: '';
+        content: attr(data-progress);
+        display: grid !important;
+        place-content: center !important;
+        color: #ddd !important;
+        font-size: 1.4em !important;
         position: absolute !important;
         right: -45% !important;
         top: 50% !important;
@@ -136,31 +172,36 @@ darkStyles.innerHTML = `
         align-items: center;
     }
 
-    #page-header,
-    #page-header :is(div, a, h1) {
+    #page-my-index #page-header,
+    #page-my-index #page-header :is(div, a, h1) {
         background-color: #2f2f2f !important;
+        z-index: 10 !important;
+        backdrop-filter: blur(5rem) !important;
     }
 
     .page-context-header {
         display: flex;
         align-items: center;
     }
-    .course-summaryitem > div > div > div:last-child {
-        --_progress-now: attr(aria-valuenow);
-        position: absolute !important;
-        right: 10% !important;
-        top: 50% !important;
-        translate: -50% -50% !important;
-        width: 105px !important;
-        aspect-ratio: 1 !important;
-        border-radius: 50% !important;
 
-        background-image: conic-gradient(from 0deg, orange var(--_progress-now), transparent 0%); !important;
-        aspect-ratio: 1 !important;
+    table {
+        border-radius: 1rem !important;
+        overflow: hidden !important;
+    }
+
+    tr:first-child {
+        background-color: #222 !important;
+    }
+    
+    table,
+    table * {
+        padding: 1rem !important;
+        background-color: #333 !important;
     }
 `;
 
 async function do_da_course_clickable_thing() {
+    document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
     while (
         /^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href) &&
         document.getElementsByClassName("course-summaryitem").length <= 1
@@ -174,14 +215,32 @@ async function do_da_course_clickable_thing() {
                 e.target.querySelector("a")?.click()
             );
 
-            console.log(
-                document.querySelectorAll(
-                    ".course-summaryitem > div > div > div:last-child"
-                )
+            const progress = document
+                .querySelectorAll(".course-summaryitem")
+                [i]?.querySelectorAll("div")[14];
+
+            const actualProgress = progress
+                ?.querySelector(".progress")
+                .querySelector("div")
+                .getAttribute("aria-valuenow");
+
+            progress?.style.setProperty(
+                "--_progress-now",
+                `${actualProgress}%`
             );
+
+            progress.setAttribute("data-progress", `${actualProgress}%`);
         });
     }
 }
 
 do_da_course_clickable_thing();
 document.querySelector("head").appendChild(darkStyles);
+
+document.title = `${document.querySelector(".page-header-headings h1").textContent}`;
+
+const favicon = document.createElement("link");
+favicon.setAttribute("rel", "shortcut icon");
+favicon.setAttribute("type", "image/x-icon");
+favicon.setAttribute("href", document.querySelector(".avatars img").src);
+document.querySelector("head").appendChild(favicon);
