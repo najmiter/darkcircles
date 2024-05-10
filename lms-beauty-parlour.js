@@ -303,6 +303,8 @@ if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
 }
 
 if (/^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href)) {
+    // Force summary view bcz haven't styled the other two :D
+    document.querySelector('a.dropdown-item[data-value="summary"]').click();
     do_da_course_clickable_thing();
 }
 
