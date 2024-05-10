@@ -238,6 +238,7 @@ async function do_da_course_clickable_thing() {
     while (document.getElementsByClassName("course-summaryitem").length <= 1) {
         await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
         // Force summary view bcz haven't styled the other two :D
+        // TODO: implement the others and remove this line
         document.querySelector('a.dropdown-item[data-value="summary"]').click();
 
         Array.from(
