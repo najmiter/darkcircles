@@ -1,5 +1,5 @@
-const darkStyles = document.createElement("style");
-darkStyles.innerHTML = `
+const koochiKoochi = document.createElement("style");
+koochiKoochi.innerHTML = `
     body::after {
         content: '';
         width: 25rem;
@@ -26,20 +26,43 @@ darkStyles.innerHTML = `
         color: #e3e3e3 !important;
         border: none !important;
     }
-    
+
+    .bg-white {
+        background-color: #202020 !important;
+    }
+    .course-summaryitem,
+    .course-summaryitem > div {
+        border-radius: 1rem !important;
+    }
+
     .course-summaryitem {
         padding: 0 !important;
-        border-radius: 1rem !important;
         position: relative !important;
     }
     
     .course-summaryitem,
-    .course-summaryitem * {
+    .course-summaryitem *,
+    .dashboard-card * {
         background-color: #2a2a2a !important;
         cursor: pointer;
-        overflow: hidden !important;
 
         transition: background-color 250ms ease !important;
+    }
+
+    .dashboard-card {
+        overflow: hidden !important;
+        margin-block: 0.5rem !important;
+        border-radius: 1rem !important;
+    }
+
+    .dashboard-card .dashboard-card-footer .progress {
+        border: none !important;
+        border-radius: 0.5rem !important;
+    }
+
+    .dashboard-card .dashboard-card-footer .progress .progress-bar {
+        background-color: dodgerblue !important;
+        height: 1rem !important;
     }
 
     .course-summaryitem:hover * {
@@ -99,7 +122,7 @@ darkStyles.innerHTML = `
         background-color: #333 !important;
     }
 
-    .block .block-cards .progress {
+    .course-summaryitem .progress {
         width: 50px !important;
         aspect-ratio: 1 !important;
         background-color: #686868 !important;
@@ -230,22 +253,26 @@ darkStyles.innerHTML = `
     .userpicture {
         padding: 0 !important
     }
+
+    #region-main .dropdown *,
+    #region-main .dropdown .dropdown-item {
+        background-color: #3e3e3e !important;
+        color: #e3e3e3 !important;
+        border-radius: 0.5rem !important;
+    }
+
+    #region-main .dropdown .dropdown-item:hover,
+    .dropdown-item:hover {
+        background-color: #4e4e4e !important;
+    }
 `;
 
-async function do_da_course_clickable_thing() {
-    if (document.querySelector(".page-header-headings h1"))
-        document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
-    while (document.getElementsByClassName("course-summaryitem").length <= 1) {
-        await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
-        // Force summary view bcz haven't styled the other two :D
-        // TODO: implement the others and remove this line
-        document
-            .querySelector('a.dropdown-item[data-value="summary"]')
-            ?.click();
-
+async function do_da_course_clickable_thing_and_add_progress_for_summary_view() {
+    let haventGotProgress = true;
+    while (haventGotProgress) {
         Array.from(
             document.getElementsByClassName("course-summaryitem")
-        ).forEach((element, i) => {
+        )?.forEach((element, i) => {
             element.addEventListener("click", (e) =>
                 e.target.querySelector("a")?.click()
             );
@@ -265,7 +292,10 @@ async function do_da_course_clickable_thing() {
             );
 
             progress?.setAttribute("data-progress", `${actualProgress}%`);
+
+            haventGotProgress = !Boolean(actualProgress);
         });
+        await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
     }
 }
 
@@ -284,6 +314,7 @@ function do_da_favicon_and_the_title_thing() {
     document.querySelector("head").appendChild(favicon);
 }
 
+// Handle the login page
 if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
     const welcome = document.querySelector(".welcome");
     welcome.style.position = "fixed";
@@ -307,9 +338,23 @@ if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
         </div>`;
 }
 
+// Handle the home page
 if (/^https:\/\/lms\.uog\.edu\.pk\/my\/.*/.test(window.location.href)) {
-    do_da_course_clickable_thing();
+    if (document.querySelector(".page-header-headings h1"))
+        document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
+
+    // For when switching between other views
+    // we still wanna render the progress
+    // and do the rest of the things
+    document
+        .querySelector('a.dropdown-item[data-value="summary"]')
+        ?.addEventListener(
+            "click",
+            do_da_course_clickable_thing_and_add_progress_for_summary_view
+        );
+
+    do_da_course_clickable_thing_and_add_progress_for_summary_view();
 }
 
 do_da_favicon_and_the_title_thing();
-document.querySelector("head").appendChild(darkStyles);
+document.querySelector("head").appendChild(koochiKoochi);
