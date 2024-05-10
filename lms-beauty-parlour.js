@@ -343,15 +343,23 @@ if (/^https:\/\/lms\.uog\.edu\.pk\/my\/.*/.test(window.location.href)) {
     if (document.querySelector(".page-header-headings h1"))
         document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
 
+    // TODO: make it work without being this weird
     // For when switching between other views
     // we still wanna render the progress
     // and do the rest of the things
     document
-        .querySelector('a.dropdown-item[data-value="summary"]')
-        ?.addEventListener(
-            "click",
-            do_da_course_clickable_thing_and_add_progress_for_summary_view
-        );
+        .querySelectorAll('div[data-region="filter"] a.dropdown-item')
+        .forEach((filter) => {
+            filter.addEventListener("click", (e) => {
+                console.log(e.target);
+                if (
+                    e.target.dataset.value === "summary" ||
+                    document.querySelector("a.active[data-value='summary']")
+                ) {
+                    do_da_course_clickable_thing_and_add_progress_for_summary_view();
+                }
+            });
+        });
 
     do_da_course_clickable_thing_and_add_progress_for_summary_view();
 }
