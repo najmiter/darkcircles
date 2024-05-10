@@ -237,6 +237,8 @@ async function do_da_course_clickable_thing() {
         document.title = `${document.querySelector(".page-header-headings h1").textContent.split(" ")[0]}'s Dashboard`;
     while (document.getElementsByClassName("course-summaryitem").length <= 1) {
         await new Promise((dontmatter) => setTimeout(dontmatter, 1 * 1000));
+        // Force summary view bcz haven't styled the other two :D
+        document.querySelector('a.dropdown-item[data-value="summary"]').click();
 
         Array.from(
             document.getElementsByClassName("course-summaryitem")
@@ -302,9 +304,7 @@ if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
         </div>`;
 }
 
-if (/^https:\/\/lms\.uog\.edu\.pk\/my\/$/.test(window.location.href)) {
-    // Force summary view bcz haven't styled the other two :D
-    document.querySelector('a.dropdown-item[data-value="summary"]').click();
+if (/^https:\/\/lms\.uog\.edu\.pk\/my\/.*/.test(window.location.href)) {
     do_da_course_clickable_thing();
 }
 
