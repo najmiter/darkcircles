@@ -61,8 +61,12 @@ koochiKoochi.innerHTML = `
     }
 
     .dashboard-card .dashboard-card-footer .progress .progress-bar {
-        background-color: dodgerblue !important;
+        background-color: orangered !important;
         height: 1rem !important;
+    }
+    
+    .dashboard-card .dashboard-card-footer .progress .progress-bar[aria-valuenow='100'] {
+        background-color: green !important;
     }
 
     .course-summaryitem:hover * {
@@ -93,6 +97,7 @@ koochiKoochi.innerHTML = `
 
     .course-summaryitem > div > div > div:last-child {
         --_progress-now: 0;
+        --_loader-color: orangered;
         position: absolute !important;
         right: 10% !important;
         top: 50% !important;
@@ -101,7 +106,7 @@ koochiKoochi.innerHTML = `
         aspect-ratio: 1 !important;
         border-radius: 50% !important;
 
-        background-image: conic-gradient(from 0deg, orange var(--_progress-now), transparent 0%); !important;
+        background-image: conic-gradient(from 0deg, var(--_loader-color) var(--_progress-now), transparent 0%); !important;
         aspect-ratio: 1 !important;
     }
 
@@ -173,7 +178,8 @@ koochiKoochi.innerHTML = `
         margin-block: 1rem !important;
     }
     
-    .btn-secondary {
+    .btn-secondary,
+    #page-login-index.moove-login #page-wrapper #page .btn-secondary {
         background-color: #0058ad !important;
     }
     
@@ -182,7 +188,8 @@ koochiKoochi.innerHTML = `
         background-color: #ad6200 !important;
     }
     
-    .btn-secondary:hover {
+    .btn-secondary:hover,
+    #page-login-index.moove-login #page-wrapper #page .btn-secondary:hover {
         background-color: #00478c !important;
     }
 
@@ -265,10 +272,11 @@ koochiKoochi.innerHTML = `
     .dropdown-item:hover {
         background-color: #4e4e4e !important;
     }
-`;
+`.replaceAll(/[\t|\n]/g, ""); // gonna have to find a better way to minify this thing
 
 async function do_da_course_clickable_thing_and_add_progress_for_summary_view() {
     let haventGotProgress = true;
+
     while (haventGotProgress) {
         Array.from(
             document.getElementsByClassName("course-summaryitem")
@@ -292,6 +300,11 @@ async function do_da_course_clickable_thing_and_add_progress_for_summary_view() 
             );
 
             progress?.setAttribute("data-progress", `${actualProgress}%`);
+
+            progress?.style.setProperty(
+                "--_loader-color",
+                `${actualProgress == 100 ? "green" : "orangered"}`
+            );
 
             haventGotProgress = !Boolean(actualProgress);
         });
@@ -353,7 +366,6 @@ if (/^https:\/\/lms\.uog\.edu\.pk\/my\/.*/.test(window.location.href)) {
         .querySelectorAll('div[data-region="filter"] a.dropdown-item')
         .forEach((filter) => {
             filter.addEventListener("click", (e) => {
-                console.log(e.target);
                 if (
                     e.target.dataset.value === "summary" ||
                     document.querySelector("a.active[data-value='summary']")
