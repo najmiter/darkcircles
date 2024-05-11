@@ -15,6 +15,7 @@ async function do_da_course_clickable_thing_and_add_progress_for_summary_view() 
             const progress = document
                 .querySelectorAll(".course-summaryitem")
                 [i]?.querySelectorAll("div")[14];
+
             const actualProgress = progress
                 ?.querySelector(".progress")
                 .querySelector("div")
