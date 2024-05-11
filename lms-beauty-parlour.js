@@ -269,7 +269,8 @@ koochiKoochi.innerHTML = `
     }
 
     #region-main .dropdown .dropdown-item:hover,
-    .dropdown-item:hover {
+    .dropdown-item:hover,
+    .dropdown-item:hover * {
         background-color: #4e4e4e !important;
     }
 `.replaceAll(/[\t|\n]/g, ""); // gonna have to find a better way to minify this thing
