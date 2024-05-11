@@ -57,6 +57,8 @@ function do_da_favicon_and_the_title_thing() {
 if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
     const welcome = document.querySelector(".welcome");
     if (welcome) {
+        document.title = "Welcome back! Login to start learning now!";
+
         welcome.style.width = "20vw";
         welcome.style.height = "100%";
         welcome.style.backgroundColor = "red !important";
