@@ -317,25 +317,27 @@ function do_da_favicon_and_the_title_thing() {
 // Handle the login page
 if (/https:\/\/lms\.uog\.edu\.pk\/login\/.*/.test(window.location.href)) {
     const welcome = document.querySelector(".welcome");
-    welcome.style.position = "fixed";
-    welcome.style.top = "5%";
-    welcome.style.left = "5%";
+    if (welcome) {
+        welcome.style.position = "fixed";
+        welcome.style.top = "5%";
+        welcome.style.left = "5%";
 
-    const themBullets = welcome.textContent
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((s) => s);
+        const themBullets = welcome.textContent
+            .split("\n")
+            .map((line) => line.trim())
+            .filter((s) => s);
 
-    let themHTML = "";
-    themBullets.forEach((point, i) => {
-        if (i < 3)
-            themHTML += `<li class="themBullet">${point.replace("* ", "")}</li>\n`;
-    });
+        let themHTML = "";
+        themBullets.forEach((point, i) => {
+            if (i < 3)
+                themHTML += `<li class="themBullet">${point.replace("* ", "")}</li>\n`;
+        });
 
-    welcome.innerHTML = `
-        <div class="themBullets">
-            ${themHTML}
-        </div>`;
+        welcome.innerHTML = `
+            <div class="themBullets">
+                ${themHTML}
+            </div>`;
+    }
 }
 
 // Handle the home page
