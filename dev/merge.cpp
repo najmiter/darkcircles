@@ -1,54 +1,46 @@
 #include <iostream>
 #include <fstream>
+#include <cstdio>
 #include <array>
 
 auto main() -> int
 {
     std::array<std::string, 4> files{
-        "dev/css/index.css",
-        "dev/css/dashboard.css",
-        "dev/css/home.css",
-        "dev/css/extras.css",
+        "index",
+        "extras",
+        "dashboard",
+        "home",
     };
 
     std::fstream output_file{"dev/koochi-koochi.css"};
 
     for (const auto &file : files)
     {
-        std::fstream css_file{file};
-        if (css_file.is_open())
-        {
-            output_file << css_file.rdbuf();
-            output_file << "\n\n";
+        std::system(("css-minify -f dev/css/" + file + ".css -o dev/minified-css").c_str());
 
-            css_file.close();
-        }
-        else
-        {
-            std::cout << "Couldn't open this bradha: " << file << std::endl;
-        }
+        std::ifstream minified_css{"dev/minified-css/" + file + ".min.css"};
+        if (minified_css.is_open())
+            output_file << minified_css.rdbuf();
+
+        minified_css.close();
     }
 
-    if (!std::system("css-minify -f dev/koochi-koochi.css -o dev/minified-css"))
+    std::ofstream source_file{"script/koochi-koochi.js"};
+    std::fstream logic_file{"script/logic.js"};
+
+    if (source_file.is_open())
     {
-        std::fstream source_file{"script/koochi-koochi.js"};
-        std::fstream logic_file{"script/logic.js"};
+        source_file << logic_file.rdbuf();
+        logic_file.close();
 
-        if (source_file.is_open())
-        {
-            source_file << logic_file.rdbuf();
-            logic_file.close();
+        source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
 
-            source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
+        output_file.seekg(0);
+        source_file << output_file.rdbuf();
+        source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
 
-            std::fstream minified_css{"dev/minified-css/koochi-koochi.min.css"};
-            if (minified_css.is_open())
-            {
-                source_file << minified_css.rdbuf();
-                source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
-                minified_css.close();
-                source_file.close();
-            }
-        }
+        source_file.close();
+
+        std::cout << "Built the output file into `script/koochi-koochi.js`" << std::endl;
     }
 }

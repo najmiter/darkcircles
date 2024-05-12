@@ -123,3 +123,7 @@ form#login {
 .input-group-addon {
     display: none;
 }
+
+.forgetpass p a {
+    color: rgba(var(--clr-main), 20%) !important;
+}
