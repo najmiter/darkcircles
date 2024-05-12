@@ -1,0 +1,112 @@
+.course-summaryitem,
+.course-summaryitem>div {
+    border-radius: 1rem !important;
+}
+
+.course-summaryitem {
+    padding: 0 !important;
+    position: relative !important;
+}
+
+.course-summaryitem,
+.course-summaryitem *,
+.dashboard-card * {
+    background-color: #2a2a2a !important;
+    cursor: pointer;
+
+    transition: background-color 250ms ease !important;
+}
+
+.dashboard-card {
+    overflow: hidden !important;
+    margin-block: 0.5rem !important;
+    border-radius: 1rem !important;
+}
+
+.dashboard-card .dashboard-card-footer .progress {
+    border: none !important;
+    border-radius: 0.5rem !important;
+}
+
+.dashboard-card .dashboard-card-footer .progress .progress-bar {
+    background-color: orangered !important;
+    height: 1rem !important;
+}
+
+.dashboard-card .dashboard-card-footer .progress .progress-bar[aria-valuenow='100'] {
+    background-color: green !important;
+}
+
+.course-summaryitem:hover * {
+    background-color: #1a1a1a !important;
+}
+
+.course-summaryitem>div {
+    padding: 2rem 1rem !important;
+}
+
+.course-summaryitem>div,
+.course-summaryitem>div>div {
+    gap: 1rem !important;
+}
+
+.course-summaryitem .border {
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+.progress .progress-bar {
+    position: relative;
+}
+
+.progress-circle:before {
+    background-color: #333;
+}
+
+.course-summaryitem>div>div>div:last-child * {
+    display: none !important;
+}
+
+.course-summaryitem>div>div>div:last-child {
+    --_progress-now: 0;
+    --_loader-color: orangered;
+    position: absolute !important;
+    right: 10% !important;
+    top: 50% !important;
+    translate: -50% -50% !important;
+    width: 105px !important;
+    aspect-ratio: 1 !important;
+    border-radius: 50% !important;
+
+    background-image: conic-gradient(from 0deg, var(--_loader-color) var(--_progress-now), transparent 0%) !important;
+    aspect-ratio: 1 !important;
+}
+
+.course-summaryitem>div>div>div:last-child::after {
+    content: attr(data-progress);
+    display: grid !important;
+    place-content: center !important;
+    color: #ddd !important;
+    font-size: 1.4em !important;
+    position: absolute !important;
+    right: -45% !important;
+    top: 50% !important;
+    translate: -50% -50% !important;
+    width: 100px !important;
+    aspect-ratio: 1 !important;
+    border-radius: 50% !important;
+    background-color: #333 !important;
+}
+
+.course-summaryitem .progress {
+    width: 50px !important;
+    aspect-ratio: 1 !important;
+    background-color: #686868 !important;
+}
+
+#page-my-index #page-header,
+#page-my-index #page-header :is(div, a, h1, form) {
+    background-color: #2f2f2f !important;
+    z-index: 10 !important;
+    backdrop-filter: blur(5rem) !important;
+}

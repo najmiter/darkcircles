@@ -14,7 +14,7 @@
     "content_scripts": [
         {
             "matches": ["*://lms.uog.edu.pk/*"],
-            "js": ["script/lms-beauty-parlour.js"],
+            "js": ["script/koochi-koochi.js"],
             "run_at": "document_idle"
         }
     ]

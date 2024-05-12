@@ -1,0 +1,125 @@
+#page-login-index.moove-login #page-wrapper #page,
+#page-login-index.moove-login #page-wrapper #page * {
+    background-color: #1a1a1a !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page {
+    background-image: none !important;
+}
+
+form#login>div {
+    margin-block: 1rem !important;
+}
+
+form#login input {
+    border: 1px solid #444 !important;
+    padding: 1.5rem 1rem;
+}
+
+#page-login-index.moove-login #page-wrapper #page input {
+    background-color: #222 !important;
+    border-radius: 10px !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page .input-group {
+    margin-block: 10px !important;
+    align-items: center;
+}
+
+#page-login-index.moove-login #page-wrapper #page :is(.themBullets, .themBulletsContainer, .themBullet, .themBulletsContainer h2, .themBulletsContainer p) {
+    background-color: inherit !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page .themBullets {
+    margin-inline-start: 1.5rem;
+    margin-block: 4rem;
+    display: grid;
+    gap: 0.7rem;
+    padding: 1rem;
+}
+
+#page-login-index.moove-login #page-wrapper #page .themBulletsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+#page-login-index.moove-login #page-wrapper #page .themBulletsContainer h2 {
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+#page-login-index.moove-login #page-wrapper #page .themBulletsContainer p {
+    color: #bbb !important;
+    margin-block-end: 1.4rem;
+}
+
+#page-login-index.moove-login #page-wrapper #page .themBullet {
+    color: #bbb !important;
+    padding-block: 0.2rem;
+    padding-inline-start: 1.2rem;
+    position: relative;
+}
+
+#page-login-index.moove-login #page-wrapper #page .themBullet::before {
+    content: attr(data-number);
+    display: grid;
+    font-size: 0.8em;
+    place-content: center;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    translate: -50% -50%;
+    font-family: monospace;
+    width: 1.42rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+}
+
+.alert-danger,
+#page-login-index.moove-login #page-wrapper #page .alert-danger {
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    color: rgb(var(--clr-main)) !important;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+}
+
+#page-login-index.moove-login #page-wrapper #page .loginpanel div.form {
+    min-width: 450px !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page p.welcome {
+    width: 25vw !important;
+    height: 100% !important;
+    background-color: #2e2e2e !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page div[role='main'] {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75vw;
+}
+
+#page-login-index.moove-login #page-wrapper #page div[role='main']:has(div[role="alertdialog"]) {
+    width: 100vw !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page .loginHeading {
+    margin-block-start: 2rem;
+    width: 100%
+}
+
+form#login {
+    display: grid;
+}
+
+.input-group-addon {
+    display: none;
+}

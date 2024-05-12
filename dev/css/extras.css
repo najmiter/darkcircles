@@ -1,0 +1,60 @@
+.bg-white {
+    background-color: #202020 !important;
+}
+
+.btn {
+    border-radius: 0.4rem !important;
+    overflow: hidden !important;
+    text-transform: capitalize !important;
+    transition: background-color 250ms ease !important;
+}
+
+.btn-secondary,
+.btn-primary {
+    padding: 10px 20px !important;
+    border-radius: 0.4rem !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+}
+
+.btn-primary,
+#page-login-index.moove-login #page-wrapper #page .btn-primary {
+    background-color: rgb(var(--clr-main)) !important;
+}
+
+.btn-secondary,
+#page-login-index.moove-login #page-wrapper #page .btn-secondary {
+    background-color: rgb(var(--clr-secondary)) !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page .btn:hover,
+.btn:hover {
+    background-color: rgba(var(--clr-accent), 70%) !important;
+    color: #eee !important;
+}
+
+.text-muted {
+    opacity: 0.75 !important;
+}
+
+.page-context-header {
+    display: flex;
+    align-items: center;
+}
+
+.userpicture {
+    padding: 0 !important
+}
+
+#region-main .dropdown *,
+#region-main .dropdown .dropdown-item {
+    background-color: #3e3e3e !important;
+    color: #e3e3e3 !important;
+    border-radius: 0.5rem !important;
+}
+
+#region-main .dropdown .dropdown-item:hover,
+.dropdown-item:hover,
+.dropdown-item:hover * {
+    background-color: #4e4e4e !important;
+}
