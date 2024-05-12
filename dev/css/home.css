@@ -125,5 +125,6 @@ form#login {
 }
 
 .forgetpass p a {
-    color: rgba(var(--clr-main), 20%) !important;
+    color: rgba(var(--clr-main), 90%) !important;
+    font-weight: bold;
 }
