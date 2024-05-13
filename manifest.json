@@ -1,21 +1,25 @@
 {
-    "manifest_version": 3,
-    "name": "UOG LMS Beauty Parlour",
-    "version": "1.0",
-    "description": "Dark mode for UOG LMS",
-    "permissions": ["activeTab", "tabs"],
-
-    "icons": {
-        "32": "icon.png",
-        "64": "icon.png",
-        "128": "icon.png"
+  "manifest_version": 3,
+  "name": "UOG LMS Beauty Parlour",
+  "version": "1.0",
+  "description": "Dark mode for UOG LMS",
+  "permissions": ["activeTab", "tabs", "scripting"],
+  "host_permissions": ["*://lms.uog.edu.pk/*"],
+  "icons": {
+    "32": "icon.png",
+    "64": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://lms.uog.edu.pk/*"],
+      "css": ["styles/koochi-koochi.css"],
+      "run_at": "document_start"
     },
-
-    "content_scripts": [
-        {
-            "matches": ["*://lms.uog.edu.pk/*"],
-            "js": ["script/koochi-koochi.js"],
-            "run_at": "document_idle"
-        }
-    ]
+    {
+      "matches": ["*://lms.uog.edu.pk/*"],
+      "js": ["script/koochi-koochi.js"],
+      "run_at": "document_idle"
+    }
+  ]
 }
