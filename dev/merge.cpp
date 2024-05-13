@@ -12,7 +12,16 @@ auto main() -> int
         "home",
     };
 
-    std::fstream output_file{"dev/koochi-koochi.css"};
+    // Create directory styles if it doesn't exist
+    std::system("mkdir -p styles");
+    
+    /* Note:
+        - The file will be created if it doesn't exist
+        - And if it exists, the content will be overwritten
+    */
+    // Open the output file in write mode
+    std::fstream output_file{"dev/koochi-koochi.css", std::ios::out};
+    std::fstream output_file2{"styles/koochi-koochi.css", std::ios::out};
 
     for (const auto &file : files)
     {
@@ -20,13 +29,20 @@ auto main() -> int
 
         std::ifstream minified_css{"dev/minified-css/" + file + ".min.css"};
         if (minified_css.is_open())
+        {
             output_file << minified_css.rdbuf();
+
+            // Reset the position of the streambuf to the beginning
+            minified_css.seekg(0);
+
+            output_file2 << minified_css.rdbuf();
+        }
 
         minified_css.close();
     }
 
-    std::ofstream source_file{"script/koochi-koochi.js"};
-    std::fstream logic_file{"script/logic.js"};
+    std::ofstream source_file{"script/koochi-koochi.js", std::ios::out};
+    std::fstream logic_file{"dev/script/logic.js"};
 
     if (source_file.is_open())
     {
@@ -35,8 +51,15 @@ auto main() -> int
 
         source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
 
-        output_file.seekg(0);
-        source_file << output_file.rdbuf();
+        // Get the contents of output_file as a string
+        std::string output_file_contents;
+        {
+            std::ifstream ifs("dev/koochi-koochi.css");
+            output_file_contents = std::string((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+        }
+
+        source_file << output_file_contents;
+
         source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
 
         source_file.close();
