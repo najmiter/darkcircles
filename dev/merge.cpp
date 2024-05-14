@@ -1,46 +1,58 @@
+#include <filesystem>
 #include <iostream>
 #include <fstream>
-#include <cstdio>
-#include <array>
+
+#define in :
+namespace fs = std::filesystem;
 
 auto main() -> int
 {
-    std::array<std::string, 4> files{
-        "index",
-        "extras",
-        "dashboard",
-        "home",
-    };
-
-    std::fstream output_file{"dev/koochi-koochi.css"};
-
-    for (const auto &file : files)
+    if (fs::exists("dev/"))
     {
-        std::system(("css-minify -f dev/css/" + file + ".css -o dev/minified-css").c_str());
-
-        std::ifstream minified_css{"dev/minified-css/" + file + ".min.css"};
-        if (minified_css.is_open())
-            output_file << minified_css.rdbuf();
-
-        minified_css.close();
+        auto css_directory = fs::directory_iterator("dev/css/");
+        for (auto css_file in css_directory)
+        {
+            std::system(("css-minify -f " + css_file.path().string() + " -o dev/minified-css").c_str());
+        }
+    }
+    else
+    {
+        std::cerr << "Couldn't find the `dev` directory." << std::endl;
+        return -1;
     }
 
-    std::ofstream source_file{"script/koochi-koochi.js"};
-    std::fstream logic_file{"script/logic.js"};
-
-    if (source_file.is_open())
+    if (fs::exists("dev/minified-css"))
     {
-        source_file << logic_file.rdbuf();
-        logic_file.close();
+        std::fstream output_file{"dev/koochi-koochi.css"};
 
-        source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
+        auto minified_css_directory = fs::directory_iterator("dev/minified-css/");
+        for (auto css_file in minified_css_directory)
+        {
+            std::ifstream minified_css{css_file.path()};
+            if (minified_css.is_open())
+            {
+                output_file << minified_css.rdbuf();
+                minified_css.close();
+            }
+        }
 
-        output_file.seekg(0);
-        source_file << output_file.rdbuf();
-        source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
+        std::ofstream source_file{"script/koochi-koochi.js"};
+        std::fstream logic_file{"script/logic.js"};
 
-        source_file.close();
+        if (source_file.is_open())
+        {
+            source_file << logic_file.rdbuf();
+            logic_file.close();
 
-        std::cout << "Built the output file into `script/koochi-koochi.js`" << std::endl;
+            source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
+
+            output_file.seekg(0);
+            source_file << output_file.rdbuf();
+            source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
+
+            source_file.close();
+
+            std::cout << "Built the output file into `script/koochi-koochi.js`" << std::endl;
+        }
     }
 }

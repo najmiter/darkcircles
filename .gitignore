@@ -1,2 +1,3 @@
 .vscode
-lms-beauty-parlour.js
+script/lms-beauty-parlour.js
+script/logic.js
