@@ -38,13 +38,13 @@ table {
     border-collapse: collapse !important;
 }
 
-tr:nth-child(2n+1),
-tr:nth-child(2n+1) td {
+tr:nth-child(odd),
+tr:nth-child(odd) td {
     background-color: #333 !important;
 }
 
-table:not(.minicalendar.calendartable),
-table:not(.minicalendar.calendartable) * {
+tr,
+tr * {
     padding: 1rem !important;
 }
 
