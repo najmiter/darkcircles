@@ -3,3 +3,40 @@
     color: #e3e3e3 !important;
     border: none !important;
 }
+
+body::after {
+    content: '';
+    width: 25rem;
+    opacity: 0.5;
+    aspect-ratio: 1;
+    background: #3D2C8D;
+    filter: blur(40rem);
+    pointer-events: none;
+    position: absolute;
+    top: -10%;
+    right: -10%;
+}
+
+body#page-login-index::after {
+    left: 0 !important;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#page-login-index.moove-login #page-wrapper #page,
+#page-login-index.moove-login #page-wrapper #page * {
+    background-color: #1a1a1a !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page {
+    background-image: none !important;
+}
+
+#page-login-index.moove-login #page-wrapper #page div[role='main'] {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75vw;
+}
