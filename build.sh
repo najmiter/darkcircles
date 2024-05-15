@@ -1,1 +1,0 @@
-g++ -std=c++2b dev/merge.cpp && ./a.out && rm ./a.out
