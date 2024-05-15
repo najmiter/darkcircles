@@ -12,7 +12,11 @@ auto main() -> int
         auto css_directory = fs::directory_iterator("dev/css/");
         for (auto css_file in css_directory)
         {
-            std::system(("css-minify -f " + css_file.path().string() + " -o dev/minified-css").c_str());
+            auto source = css_file.path().string();
+            auto destination = "dev/minified-css/" + css_file.path().filename().string();
+
+            std::cout << "Minifying `" << source << "` into `" << destination << '`' << std::endl;
+            std::system(("minify " + source + " > " + destination).c_str());
         }
     }
     else

@@ -1,13 +1,13 @@
 if [ "$1" == "prod" ]; then
     echo "Copying the latest script..."
-    cp -f script/koochi-koochi.js prod/koochi-koochi.js
+    minify script/koochi-koochi.js > prod/koochi-koochi.js
 
     echo "Zipping the directory..."
     zip prod.zip prod/*
 
 elif [ "$1" == "buildprod" ]; then
-    bash build.sh
-    bash build.sh prod
+    bash bro.sh
+    bash bro.sh prod
 
 elif [ "$1" == "push" ] && [ "$2" != "" ]; then
     echo "Adding the commit..."
