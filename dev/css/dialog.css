@@ -1,0 +1,33 @@
+.moodle-dialogue-base .moodle-dialogue * {
+    background-color: #333 !important;
+}
+
+.moodle-dialogue-base .moodle-dialogue .fp-repo[aria-selected="true"] * {
+    background-color: #222 !important;
+}
+
+.moodle-dialogue-base .moodle-dialogue .btn-primary {
+    background-color: rgb(var(--clr-main)) !important;
+}
+
+.moodle-dialogue-base .moodle-dialogue .btn-primary:hover {
+    background-color: rgb(var(--clr-secondary)) !important;
+}
+
+.moodle-dialogue-base .moodle-dialogue .btn-secondary {
+    background-color: rgb(var(--clr-secondary)) !important;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: rgb(var(--clr-main)) !important;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    color: #eee !important;
+    transition: background-color 200ms;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: rgb(var(--clr-secondary)) !important;
+}
