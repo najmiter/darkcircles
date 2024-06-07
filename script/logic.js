@@ -1,3 +1,24 @@
+document
+    .querySelectorAll("#page-course-view-weeks img[title]")
+    ?.forEach((img) => {
+        img.style.width = "30px";
+        img.style.height = "30px";
+
+        if (
+            !img.getAttribute("title").toLowerCase().includes("not completed")
+        ) {
+            img.setAttribute(
+                "src",
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='30px' viewBox='0 -960 960 960' width='30px' fill='%235985E1'%3E%3Cpath d='m429-336 238-237-51-51-187 186-85-84-51 51 136 135ZM216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Zm0-528v528-528Z'/%3E%3C/svg%3E"
+            );
+        } else {
+            img.setAttribute(
+                "src",
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='30px' viewBox='0 -960 960 960' width='30px' fill='%23999999'%3E%3Cpath d='M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Z'/%3E%3C/svg%3E"
+            );
+        }
+    });
+
 async function do_da_course_clickable_thing_and_add_progress_for_summary_view() {
     let haventGotProgress = true;
 

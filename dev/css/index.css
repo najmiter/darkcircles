@@ -52,3 +52,17 @@ input {
     border: 1px solid #444 !important;
     border-radius: 0.5rem !important;
 }
+
+td:has(div.commentscontainer) {
+    padding: 0 !important;
+}
+
+td:has(div.fileuploadsubmission) * {
+    padding: 0 !important;
+    background-color: #333 !important;
+}
+
+td:has(div.fileuploadsubmission) {
+    padding: 16px !important;
+    background-color: #333 !important;
+}

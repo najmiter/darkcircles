@@ -1,0 +1,10 @@
+.filemanager-container .fm-content-wrapper thead.yui3-datatable-columns *,
+.filemanager-container .fm-content-wrapper tbody.yui3-datatable-message *,
+div.filemanager-container {
+    background: #333 !important;
+    border: none !important;
+}
+
+.filemanager-container .fm-content-wrapper tbody.yui3-datatable-data * {
+    background: #444 !important;
+}
