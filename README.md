@@ -8,7 +8,7 @@ Try it out for free from the Chrome Web Store: [Click here](https://chromewebsto
 
 Here are some previews after installing this extension. (As of May 15, 2024)
 
-![Home page preview](https://lh3.googleusercontent.com/8OD3enYVOIxMKMz0q1NdCq8-qMqsBxkdK5EWBJlq_5WPI4JZ1t_4o5HnVu6LA-JgAsvWRNqP7qfnGp6C9-WV3Noz=s1280-w1280-h800)
+![Home page preview](https://lh3.googleusercontent.com/cZwQbwU6ve8umruFRe2WeAV8gz6DWHVKrq-KZsZnF2TR4PG-PApYLv-ibl4rGsAoXghq5NADD4DzWmD2UnX1hEJk=s1280-w1280-h800)
 
 ![Dashboard preview](https://lh3.googleusercontent.com/h9naZ-qVHjBkrU6z_S_erDYnW-JU7ATwS8qzNJjH5EHAth_jmIc7JfDnIksg9BlYWI8Of8dN6YMNwRn2hL7cqbD1=s1280-w1280-h800)
 
