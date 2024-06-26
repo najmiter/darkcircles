@@ -77,14 +77,12 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%235985E1'%3E%3Cpath d='M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z'/%3E%3C/svg%3E");
 }
 
-#page-mod-attendance-view table td {
-    font-weight: bold;
-}
-
 #page-mod-attendance-view table td[style='color: #314489'] {
     color: limegreen !important;
+    font-weight: bold;
 }
 
 #page-mod-attendance-view table td[style='color: red'] {
     color: orangered !important;
+    font-weight: bold;
 }
