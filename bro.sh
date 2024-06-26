@@ -3,7 +3,6 @@ if [ "$1" == "prod" ]; then
     minify script/koochi-koochi.js > prod/koochi-koochi.js
     minify css/reset.css > prod/reset.css
 
-
     echo "Zipping the directory..."
     zip prod.zip prod/*
 
@@ -27,5 +26,8 @@ elif [ "$1" == "push" ]; then
 
 else
     echo Building...
-    g++ -std=c++2b dev/merge.cpp && ./a.out && rm ./a.out
+    cat dev/css/* > dev/style.css
+    minify dev/style.css > dev/koochi-koochi.css
+    ./a.out
+    rm dev/style.css
 fi

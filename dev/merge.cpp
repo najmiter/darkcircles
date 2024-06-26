@@ -7,6 +7,7 @@ namespace fs = std::filesystem;
 
 auto main() -> int
 {
+#if 0
     if (fs::exists("dev/"))
     {
         auto css_directory = fs::directory_iterator("dev/css/");
@@ -24,11 +25,13 @@ auto main() -> int
         std::cerr << "Couldn't find the `dev` directory." << std::endl;
         return -1;
     }
+#endif
 
     if (fs::exists("dev/minified-css"))
     {
         std::fstream output_file{"dev/koochi-koochi.css"};
 
+#if 0
         auto minified_css_directory = fs::directory_iterator("dev/minified-css/");
         for (auto css_file in minified_css_directory)
         {
@@ -39,7 +42,7 @@ auto main() -> int
                 minified_css.close();
             }
         }
-
+#endif
         std::ofstream source_file{"script/koochi-koochi.js"};
         std::fstream logic_file{"script/logic.js"};
 
@@ -50,7 +53,6 @@ auto main() -> int
 
             source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
 
-            output_file.seekg(0);
             source_file << output_file.rdbuf();
             source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
 

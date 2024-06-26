@@ -63,3 +63,16 @@
     color: lightgreen !important;
     font-weight: 600 !important;
 }
+
+#page-navbar .breadcrumb li *::after,
+#page-navbar .breadcrumb li::after {
+    top: 18% !important;
+    left: 92% !important;
+    border: none !important;
+}
+
+#page-navbar .breadcrumb li::after {
+    width: 24px !important;
+    height: 24px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%235985E1'%3E%3Cpath d='M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z'/%3E%3C/svg%3E");
+}
