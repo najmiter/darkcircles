@@ -27,9 +27,7 @@ auto main() -> int
     }
 #endif
 
-    if (fs::exists("dev/minified-css"))
-    {
-        std::fstream output_file{"dev/koochi-koochi.css"};
+    std::fstream output_file{"dev/koochi-koochi.css"};
 
 #if 0
         auto minified_css_directory = fs::directory_iterator("dev/minified-css/");
@@ -43,22 +41,21 @@ auto main() -> int
             }
         }
 #endif
-        std::ofstream source_file{"script/koochi-koochi.js"};
-        std::fstream logic_file{"script/logic.js"};
+    std::ofstream source_file{"script/koochi-koochi.js"};
+    std::fstream logic_file{"script/logic.js"};
 
-        if (source_file.is_open())
-        {
-            source_file << logic_file.rdbuf();
-            logic_file.close();
+    if (source_file.is_open())
+    {
+        source_file << logic_file.rdbuf();
+        logic_file.close();
 
-            source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
+        source_file << "\nconst koochiKoochi = document.createElement(\"style\");\nkoochiKoochi.innerHTML = `";
 
-            source_file << output_file.rdbuf();
-            source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
+        source_file << output_file.rdbuf();
+        source_file << "`;\n\ndocument.querySelector(\"head\").appendChild(koochiKoochi);\n";
 
-            source_file.close();
+        source_file.close();
 
-            std::cout << "Built the output file into `script/koochi-koochi.js`" << std::endl;
-        }
+        std::cout << "Built the output file into `script/koochi-koochi.js`" << std::endl;
     }
 }
