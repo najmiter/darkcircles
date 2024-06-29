@@ -1,3 +1,39 @@
+window.onload = function () {
+    const iframe = document.getElementById("resourceobject");
+    if (!iframe) return;
+
+    const thing = iframe.contentDocument || iframe.contentWindow.document;
+    if (!thing) return;
+
+    thing.addEventListener("DOMContentLoad", function () {
+        const style = document.createElement("style");
+        style.innerHTML = `
+        html {
+            font-family: system-ui, sans-serif;
+            color-scheme: dark;
+            background-color: #333;
+        }
+    `;
+
+        thing.head.appendChild(style);
+
+        const nooneCares = thing.querySelectorAll("input");
+        if (nooneCares) {
+            const yes = confirm(
+                "Looks like you got yourself a unwanted quiz. Would you like to skip it?"
+            );
+            if (yes) {
+                nooneCares.forEach((each) => {
+                    if (each.value === "1" || each.value === "225")
+                        each.checked = true;
+                });
+
+                thing.querySelector(`input[type='submit']`).click();
+            }
+        }
+    });
+};
+
 if (
     /https:\/\/lms\.uog\.edu\.pk\/course\/view.php\?.*/.test(
         window.location.href
