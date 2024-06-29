@@ -1,38 +1,45 @@
 window.onload = function () {
-    const iframe = document.getElementById("resourceobject");
-    if (!iframe) return;
+    const thing = document.getElementById("resourceobject")?.contentWindow;
+    if (thing) {
+        const yes = confirm(
+            "Looks like you got a survey, do you want to automate it?"
+        );
 
-    const thing = iframe.contentDocument || iframe.contentWindow.document;
-    if (!thing) return;
+        if (!yes) return;
 
-    const style = document.createElement("style");
-    style.innerHTML = `
-        html {
+        const style = document.createElement("style");
+        style.innerHTML = `
+          html {
             font-family: system-ui, sans-serif;
             color-scheme: dark;
             background-color: #333;
-        }
-    `;
+          }
+        `;
 
-    thing.head.appendChild(style);
+        thing.document.head.appendChild(style);
 
-    const yes = confirm(
-        "Looks like you got yourself a unwanted quiz. Would you like to skip it?"
-    );
-
-    thing.addEventListener("DOMContentLoad", function () {
-        const nooneCares = thing.querySelectorAll("input");
-        if (nooneCares) {
-            if (yes) {
-                nooneCares.forEach((each) => {
+        const total_subjects =
+            document.querySelectorAll(
+                ".metismenu li[data-key=mycourses] ul li.list-group-item"
+            )?.length ?? 8;
+        let counter = 0;
+        const delay = 2000;
+        for (; counter < total_subjects * 2; counter++) {
+            setTimeout(() => {
+                thing.document.querySelectorAll("input").forEach((each) => {
                     if (each.value === "1" || each.value === "225")
                         each.checked = true;
                 });
 
-                thing.querySelector(`input[type='submit']`).click();
-            }
+                thing.document.querySelector(`input[type='submit']`).click();
+            }, counter * delay);
+            thing.document.head.appendChild(style);
         }
-    });
+
+        setTimeout(() => {
+            document.getElementById("actionmenuaction-6").click();
+        }, counter * delay);
+    }
 };
 
 if (

@@ -1,3 +1,57 @@
+function radio_r_checkboxes_ko_parlor_py_jana_h_unhy_chhuti_dyn() {
+    const radios = document.querySelectorAll(`input[type='radio']`);
+    const checkboxes = document.querySelectorAll(`input[type='checkbox']`);
+
+    function twinkle_twinkle_pink_stars(img, yes) {
+        img.setAttribute(
+            "src",
+            yes
+                ? `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='35px' viewBox='0 -960 960 960' width='35px' fill='%235985E1'%3E%3Cpath d='m429-336 238-237-51-51-187 186-85-84-51 51 136 135ZM216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Zm0-528v528-528Z'/%3E%3C/svg%3E`
+                : `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='35px' viewBox='0 -960 960 960' width='35px' fill='%23999999'%3E%3Cpath d='M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Z'/%3E%3C/svg%3E`
+        );
+    }
+
+    function ap_chatkhara_lgwa_ayn(customers) {
+        for (const radio of customers) {
+            const abbaJaan = radio.parentNode;
+            const img = document.createElement("img");
+            img.classList.add("radio-x-checkbox-img");
+            twinkle_twinkle_pink_stars(img, radio.checked);
+
+            radio.style.visibility = "hidden";
+            if (!radio.getAttribute("disabled")) {
+                img.addEventListener("click", dimple_queen);
+                radio.nextElementSibling?.addEventListener(
+                    "click",
+                    dimple_queen
+                );
+
+                function dimple_queen(e) {
+                    e.preventDefault();
+                    radio.checked = !radio.checked;
+
+                    if (radio.type === "radio") {
+                        for (const radio of customers) {
+                            const abbaJaan = radio.parentNode;
+                            const img = abbaJaan.querySelector("img");
+                            twinkle_twinkle_pink_stars(img, radio.checked);
+                        }
+                    }
+
+                    twinkle_twinkle_pink_stars(img, radio.checked);
+                }
+            }
+
+            abbaJaan.insertBefore(img, radio);
+        }
+    }
+
+    ap_chatkhara_lgwa_ayn(radios);
+    ap_chatkhara_lgwa_ayn(checkboxes);
+}
+
+radio_r_checkboxes_ko_parlor_py_jana_h_unhy_chhuti_dyn();
+
 window.onload = function () {
     const thing = document.getElementById("resourceobject")?.contentWindow;
     if (thing) {

@@ -6,18 +6,6 @@ Try it out for free from the Chrome Web Store: [Click here](https://chromewebsto
 
 ## Preview
 
-#### Latest
-
-![Home page preview](https://lh3.googleusercontent.com/vNZldmLIt082vw1GXHZGVTwn0HMCEzfkJgPly-kw8nNpZnJElk5sFkcLxiS-kreqp44PCP7pEedJOMfDwJ7TdeDe=w1280-h800)
-
-![Home page preview](https://lh3.googleusercontent.com/vGSDu6k6o6JGJD5NsEk9QQcwHlyipknbvUGW9q7xpX1ef2cRW1q3cnk5I-YJOcomn25GpJXdeyj4FwL58lamAasTZTM=w1280-h800)
-
-![Home page preview](https://lh3.googleusercontent.com/yde-hlHa8YRN-CTto-12NV9Czc09XhcCy79iL41ld5ha4EqWTMyBowlE6F2vp90dXla1ZFPBbw0m5FCacP2ilf0OLw=w1280-h800)
-
-![Home page preview](https://lh3.googleusercontent.com/oesHHvKyDAs9WFymRMLD6cvD3lrJIEM6TS2-9Ib1cHyBmd9FSwbxlIqI5OOj1OqMLnISUksaUbzJcAtLU9bwrB8e=w1280-h800)
-
-#### Classic
-
 Here are some previews after installing this extension. (As of May 15, 2024)
 ![Home page preview](https://lh3.googleusercontent.com/cZwQbwU6ve8umruFRe2WeAV8gz6DWHVKrq-KZsZnF2TR4PG-PApYLv-ibl4rGsAoXghq5NADD4DzWmD2UnX1hEJk=s1280-w1280-h800)
 

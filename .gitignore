@@ -1,6 +1,7 @@
 .vscode
 script/lms-beauty-parlour.js
-prod
+dev
 *.zip
 *.out
-dev/style.css
+dev/*
+scripts

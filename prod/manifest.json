@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "UOG LMS Beauty Parlour",
-    "version": "1.26",
+    "version": "1.27",
     "description": "Dark mode for UOG LMS",
 
     "icons": {
@@ -13,8 +13,8 @@
     "content_scripts": [
         {
             "matches": ["*://lms.uog.edu.pk/*"],
-            "js": ["script/koochi-koochi.js"],
-            "css": ["css/reset.css"],
+            "js": ["koochi-koochi.js"],
+            "css": ["reset.css"],
             "run_at": "document_idle"
         }
     ]
