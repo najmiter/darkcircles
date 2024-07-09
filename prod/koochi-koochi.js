@@ -240,6 +240,33 @@ if (/^https:\/\/lms\.uog\.edu\.pk\/my\/.*/.test(window.location.href)) {
         });
 
     do_da_course_clickable_thing_and_add_progress_for_summary_view();
+
+    const gradients = [
+        "#348f50, #56b4d3",
+        "#000046, #1CB5E0",
+        "#9CECFB, #65C7F7, #0052D4",
+        "#43C6AC, #F8FFAE",
+        "#EECDA3, #EF629F",
+        "#3494E6, #EC6EAD",
+        "#03001e, #7303c0, #ec38bc, #fdeff9",
+        "#FC5C7D, #6A82FB",
+        "#f12711, #f5af19",
+        "#56ab2f, #a8e063",
+        "#FFE000, #799F0C",
+    ];
+
+    const id = setInterval(() => {
+        const stupidImages = document.querySelectorAll(".summaryimage");
+        if (stupidImages.length > 0) {
+            stupidImages.forEach((shurliImg, i) => {
+                shurliImg.setAttribute(
+                    "style",
+                    `background-image: linear-gradient(to ${i % 2 ? "left" : "bottom"}, ${gradients[i % gradients.length]})`
+                );
+            });
+            clearInterval(id);
+        }
+    }, 100);
 }
 
 do_da_favicon_and_the_title_thing();

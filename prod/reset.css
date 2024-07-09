@@ -16,7 +16,7 @@ html {
     color-scheme: dark;
 }
 
-body:after {
+body::after {
     aspect-ratio: 1;
     background: #3d2c8d;
     content: "";
@@ -68,31 +68,8 @@ table b {
     background-color: inherit !important
 }
 
-body::after {
-    content: '';
-    width: 25rem;
-    opacity: 0.5;
-    aspect-ratio: 1;
-    background: #3D2C8D;
-    filter: blur(40rem);
-    pointer-events: none;
-    position: absolute;
-    top: -10%;
-    right: -10%;
-}
-
 body#page-login-index::after {
     left: 0 !important;
-}
-
-body {
-    overflow-x: hidden;
-}
-
-* {
-    background-color: #202020 !important;
-    color: #e3e3e3 !important;
-    border: none !important;
 }
 
 table {
@@ -129,6 +106,10 @@ td:has(div.fileuploadsubmission) * {
 td:has(div.fileuploadsubmission) {
     padding: 16px !important;
     background-color: #333 !important;
+}
+
+[color=red] {
+    color: orangered !important;
 }
 
 /* HOME */
@@ -549,8 +530,8 @@ div.filemanager-container {
 
 /* EXTRAS */
 
-.bg-white {
-    background-color: #202020 !important;
+div.bg-white {
+    background-color: #222222 !important;
 }
 
 table div.singlebutton,
@@ -642,6 +623,28 @@ table div.singlebutton form {
 #page-mod-attendance-view table td[style='color: red'] {
     color: orangered !important;
     font-weight: bold;
+}
+
+#page-content .course-content .weeks .activity *,
+#page-content .course-content .weeks .activity {
+    background-color: #222 !important;
+}
+
+#page-content .course-content .weeks .activity:hover,
+#page-content .course-content .weeks .activity:hover * {
+    background-color: #333 !important;
+}
+
+#page-content .course-content .weeks .activity {
+    border: 2px solid #333 !important;
+    padding: 1rem 2rem !important;
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    margin-block: 0.5rem !important;
+}
+
+.course-content ul.section {
+    margin: 1rem 0 !important;
 }
 
 /* CALENDAR */
