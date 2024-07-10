@@ -641,6 +641,25 @@ table div.singlebutton form {
     border-radius: 1rem !important;
     overflow: hidden !important;
     margin-block: 0.5rem !important;
+    position: relative !important;
+}
+
+.LMS-grades-feedback {
+    background-color: transparent !important;
+    width: fit-content !important;
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    color: lightskyblue !important;
+}
+
+.LMS-grades-feedback--graded {
+    color: limegreen !important;
+}
+
+.LMS-grades-feedback--not-graded {
+    color: orangered !important;
 }
 
 .course-content ul.section {

@@ -1,3 +1,74 @@
+window.onload = function () {
+    automate_survey();
+    show_da_grades_in_front_of_activity();
+};
+
+function show_da_grades_in_front_of_activity() {
+    const activities = document.querySelectorAll(".activity");
+    if (activities.length > 0) {
+        activities.forEach((activity) => {
+            const isAss = activity.classList.contains("assign");
+            const isQuiz = activity.classList.contains("quiz");
+
+            if (isAss || isQuiz) {
+                const link = activity.querySelector("a").href;
+                const div = document.createElement("div");
+                div.classList.add("LMS-grades-feedback");
+                activity.appendChild(div);
+                div.textContent = "fetching results...";
+
+                fetch(link)
+                    .then((res) => res.text())
+                    .then((data) => {
+                        const doc = new DOMParser().parseFromString(
+                            data,
+                            "text/html"
+                        );
+
+                        const selector = isAss
+                            ? ".feedback table tbody tr:first-child td"
+                            : "#feedback h3";
+
+                        const graded = doc.querySelector(selector);
+
+                        if (graded) {
+                            let status = graded.textContent;
+                            if (isQuiz) {
+                                status = status
+                                    .split(" ")
+                                    .pop()
+                                    .substring(0, status.length - 2)
+                                    .split("/")
+                                    .join(" / ");
+                            }
+
+                            if (
+                                status.toLowerCase() ==
+                                "Grade of final cannot be displayed as per UoG policy.".toLowerCase()
+                            ) {
+                                div.textContent =
+                                    "UOG policy shareef k tehat abi ye ni dikhaya ja skta! 😐";
+                            } else {
+                                div.textContent = status;
+                            }
+                            div.classList.add("LMS-grades-feedback--graded");
+                        } else {
+                            div.textContent = "Not graded yet!";
+                            div.classList.add(
+                                "LMS-grades-feedback--not-graded"
+                            );
+                        }
+
+                        div.style.fontWeight = "bold";
+                    })
+                    .catch((bruh) => {
+                        div.textContent = "Couldn't get grades :(";
+                    });
+            }
+        });
+    }
+}
+
 function radio_r_checkboxes_ko_parlor_py_jana_h_unhy_chhuti_dyn() {
     const radios = document.querySelectorAll(`input[type='radio']`);
     const checkboxes = document.querySelectorAll(`input[type='checkbox']`);
@@ -50,9 +121,7 @@ function radio_r_checkboxes_ko_parlor_py_jana_h_unhy_chhuti_dyn() {
     ap_chatkhara_lgwa_ayn(checkboxes);
 }
 
-radio_r_checkboxes_ko_parlor_py_jana_h_unhy_chhuti_dyn();
-
-window.onload = function () {
+function automate_survey() {
     const thing = document.getElementById("resourceobject")?.contentWindow;
     if (thing) {
         const yes = confirm(
@@ -94,7 +163,7 @@ window.onload = function () {
             document.getElementById("actionmenuaction-6").click();
         }, counter * delay);
     }
-};
+}
 
 if (
     /https:\/\/lms\.uog\.edu\.pk\/course\/view.php\?.*/.test(
@@ -270,3 +339,4 @@ if (/^https:\/\/lms\.uog\.edu\.pk\/my\/.*/.test(window.location.href)) {
 }
 
 do_da_favicon_and_the_title_thing();
+radio_r_checkboxes_ko_parlor_py_jana_h_unhy_chhuti_dyn();
