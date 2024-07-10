@@ -1,7 +1,64 @@
 window.onload = function () {
     automate_survey();
     show_da_grades_in_front_of_activity();
+    show_grades_summary_on_summary_cards_if_any();
 };
+
+function show_grades_summary_on_summary_cards_if_any() {
+    const id = setInterval(() => {
+        const courses = document.querySelectorAll(".course-summaryitem");
+
+        if (courses.length > 1) {
+            courses.forEach((course) => {
+                const link = course.querySelector("a");
+                const id = new URLSearchParams(new URL(link.href).search).get(
+                    "id"
+                );
+
+                const gradeBook = `https://lms.uog.edu.pk/grade/report/user/index.php?id=${id}`;
+
+                fetch(gradeBook)
+                    .then((res) => res.text())
+                    .then((data) => {
+                        const doc = new DOMParser().parseFromString(
+                            data,
+                            "text/html"
+                        );
+
+                        const trs = doc.querySelectorAll("table tr");
+                        if (trs && trs.length > 0) {
+                            const div = document.createElement("div");
+                            div.classList.add("LMS-summary-gradebook");
+                            course.appendChild(div);
+
+                            const terms = trs[0].querySelectorAll("th");
+                            const result =
+                                trs[trs.length - 2].querySelectorAll("td");
+
+                            for (const [i, term] of terms.entries()) {
+                                const item = document.createElement("div");
+                                item.classList.add(
+                                    "LMS-summary-gradebook--item"
+                                );
+
+                                const title = document.createElement("p");
+                                const grade = document.createElement("p");
+
+                                title.textContent = term.textContent;
+                                grade.textContent = result[i].textContent;
+
+                                item.append(title, grade);
+
+                                div.appendChild(item);
+                            }
+                        }
+                    });
+            });
+
+            clearInterval(id);
+        }
+    }, 500);
+}
 
 function show_da_grades_in_front_of_activity() {
     const activities = document.querySelectorAll(".activity");
@@ -9,8 +66,9 @@ function show_da_grades_in_front_of_activity() {
         activities.forEach((activity) => {
             const isAss = activity.classList.contains("assign");
             const isQuiz = activity.classList.contains("quiz");
+            const isAttenda = activity.classList.contains("attendance");
 
-            if (isAss || isQuiz) {
+            if (isAss || isQuiz || isAttenda) {
                 const link = activity.querySelector("a").href;
                 const div = document.createElement("div");
                 div.classList.add("LMS-grades-feedback");
@@ -25,6 +83,24 @@ function show_da_grades_in_front_of_activity() {
                             "text/html"
                         );
 
+                        if (isAttenda) {
+                            const td = doc.querySelector(
+                                "table tbody tr:last-child td"
+                            );
+                            if (!td) return;
+
+                            div.classList.add(
+                                td.textContent >= 70
+                                    ? "LMS-grades-feedback--graded"
+                                    : "LMS-grades-feedback--not-graded"
+                            );
+
+                            div.textContent = `${td.textContent}%`;
+                            div.style.fontWeight = "bold";
+
+                            return;
+                        }
+
                         const selector = isAss
                             ? ".feedback table tbody tr:first-child td"
                             : "#feedback h3";
@@ -32,24 +108,29 @@ function show_da_grades_in_front_of_activity() {
                         const graded = doc.querySelector(selector);
 
                         if (graded) {
-                            let status = graded.textContent;
+                            let status = [""];
                             if (isQuiz) {
+                                status = graded.textContent.split(" ").pop();
+
                                 status = status
-                                    .split(" ")
-                                    .pop()
-                                    .substring(0, status.length - 2)
-                                    .split("/")
-                                    .join(" / ");
+                                    .substring(0, status.length - 1)
+                                    .split("/");
+                            } else {
+                                status = graded.textContent
+                                    .replace(/\u00A0/g, "")
+                                    .split("/");
                             }
 
+                            const [got, outOf] = status;
+
                             if (
-                                status.toLowerCase() ==
+                                graded.textContent.toLowerCase() ==
                                 "Grade of final cannot be displayed as per UoG policy.".toLowerCase()
                             ) {
                                 div.textContent =
                                     "UOG policy shareef k tehat abi ye ni dikhaya ja skta! 😐";
                             } else {
-                                div.textContent = status;
+                                div.innerHTML = `<div style="">${got}</div><sub><span>/</span><span>${outOf}</span></sub>`;
                             }
                             div.classList.add("LMS-grades-feedback--graded");
                         } else {
@@ -58,8 +139,6 @@ function show_da_grades_in_front_of_activity() {
                                 "LMS-grades-feedback--not-graded"
                             );
                         }
-
-                        div.style.fontWeight = "bold";
                     })
                     .catch((bruh) => {
                         div.textContent = "Couldn't get grades :(";

@@ -651,15 +651,62 @@ table div.singlebutton form {
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    color: lightskyblue !important;
+    color: rgb(145, 145, 145) !important;
+    display: flex;
+    gap: 0.1rem;
+    align-items: center;
+    font-weight: bold !important;
 }
 
+.LMS-grades-feedback--graded div,
 .LMS-grades-feedback--graded {
-    color: limegreen !important;
+    color: rgb(67, 229, 67) !important;
+}
+
+.LMS-grades-feedback--graded sub span {
+    color: rgb(145, 145, 145) !important;
 }
 
 .LMS-grades-feedback--not-graded {
-    color: orangered !important;
+    color: rgb(255, 103, 47) !important;
+}
+
+.LMS-summary-gradebook {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.course-summaryitem .LMS-summary-gradebook--item {
+    width: 200px;
+    display: grid;
+    grid-template-columns: 1fr 70px;
+    gap: 0 !important;
+    justify-content: center !important;
+}
+
+.course-summaryitem .LMS-summary-gradebook--item:first-child {
+    margin-bottom: 0.2rem;
+}
+
+.course-summaryitem .LMS-summary-gradebook--item p:first-child {
+    justify-self: end;
+}
+
+.LMS-summary-gradebook--item p {
+    width: fit-content !important;
+    transform: scale(0.9);
+    color: #bbb !important;
+    border-radius: 0.5em;
+    background-color: #333 !important;
+    padding: 0.5rem 0.7rem;
+    margin: 0 !important;
+}
+
+.course-summaryitem:hover .LMS-summary-gradebook--item p {
+    color: #eee !important;
+    transform: scale(1);
 }
 
 .course-content ul.section {
