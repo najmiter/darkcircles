@@ -528,6 +528,27 @@ div.filemanager-container {
     background-color: #333 !important;
 }
 
+.LMS-shinkalaka-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-weight: bold;
+}
+
+.LMS-shinkalaka-container p {
+    color: rgb(34, 201, 34) !important;
+}
+
+.LMS-shinkalaka {
+    width: fit-content;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: orangered !important;
+    color: black !important;
+}
+
 /* EXTRAS */
 
 div.bg-white {

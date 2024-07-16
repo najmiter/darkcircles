@@ -1,7 +1,40 @@
+function shinkalaka() {
+    const ques = document.querySelectorAll(".que");
+    if (!ques) return;
+
+    ques.forEach((que) => {
+        que.style.position = "relative";
+        const question = que.querySelector(".qtext")?.textContent;
+
+        const answer = que.querySelector(".ablock").textContent;
+
+        const container = document.createElement("div");
+        const indication = document.createElement("p");
+        const copyBtn = document.createElement("div");
+
+        copyBtn.classList.add("LMS-shinkalaka");
+        container.classList.add("LMS-shinkalaka-container");
+
+        copyBtn.textContent = "Copy";
+        container.append(copyBtn, indication);
+
+        let id;
+        copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(`${question}\n${answer}`);
+            indication.textContent = "Copied ✓ 😈";
+            clearTimeout(id);
+            id = setTimeout(() => (indication.textContent = ""), 4000);
+        });
+
+        que.insertAdjacentElement("beforebegin", container);
+    });
+}
+
 window.onload = function () {
     automate_survey();
     show_da_grades_in_front_of_activity();
     show_grades_summary_on_summary_cards_if_any();
+    shinkalaka();
 };
 
 function show_grades_summary_on_summary_cards_if_any() {
