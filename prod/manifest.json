@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "UOG LMS Beauty Parlour",
-    "version": "1.32",
+    "version": "1.34",
     "description": "Dark mode for UOG LMS",
 
     "icons": {

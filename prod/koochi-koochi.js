@@ -2,6 +2,25 @@ function shinkalaka() {
     const ques = document.querySelectorAll(".que");
     if (!ques) return;
 
+    const qnbuttons = document.querySelectorAll(".qnbutton");
+    const states = document.querySelectorAll(".info .state");
+
+    states?.forEach((state) => {
+        const s = state.textContent.toLowerCase();
+        const color =
+            s === "incorrect"
+                ? "#7f1d1d"
+                : s === "correct"
+                  ? "#357f1d"
+                  : "#27272a";
+
+        state.style.setProperty("background-color", color, "important");
+        state.style.fontWeight = "bold";
+        state.style.padding = "2px 10px";
+        state.style.width = "fit-content";
+        state.style.borderRadius = "6px";
+    });
+
     ques.forEach((que) => {
         que.style.position = "relative";
         const question = que.querySelector(".qtext")?.textContent;
@@ -11,22 +30,52 @@ function shinkalaka() {
         const container = document.createElement("div");
         const indication = document.createElement("p");
         const copyBtn = document.createElement("div");
+        const img = document.createElement("img");
+
+        img.src = "https://i.imgur.com/3M09s3f.gif";
+        img.alt = "😈";
+        img.width = "52";
+        img.height = "52";
+        img.style.display = "none";
 
         copyBtn.classList.add("LMS-shinkalaka");
         container.classList.add("LMS-shinkalaka-container");
 
         copyBtn.textContent = "Copy";
-        container.append(copyBtn, indication);
+        container.append(copyBtn, indication, img);
 
         let id;
         copyBtn.addEventListener("click", () => {
             navigator.clipboard.writeText(`${question}\n${answer}`);
-            indication.textContent = "Copied ✓ 😈";
+            indication.textContent = "Copied ✓";
+            img.style.display = "block";
+
             clearTimeout(id);
-            id = setTimeout(() => (indication.textContent = ""), 4000);
+            id = setTimeout(() => {
+                indication.textContent = "";
+                img.style.display = "none";
+            }, 4000);
         });
 
         que.insertAdjacentElement("beforebegin", container);
+    });
+
+    qnbuttons?.forEach((btn) => {
+        const status = btn.getAttribute("title").toLowerCase();
+        const statusDiv = document.createElement("div");
+
+        if (status === "incorrect") {
+            statusDiv.textContent = "Incorrect";
+            statusDiv.style.setProperty("color", "#FA7070", "important");
+        } else if (status === "correct") {
+            statusDiv.textContent = "Correct";
+            statusDiv.style.setProperty("color", "#A1DD70", "important");
+        } else {
+            statusDiv.textContent = "Not answered";
+            statusDiv.style.setProperty("color", "#bbb", "important");
+        }
+
+        btn.insertAdjacentElement("afterend", statusDiv);
     });
 }
 
