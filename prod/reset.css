@@ -573,7 +573,8 @@ div.filemanager-container {
 
 /* EXTRAS */
 
-div.bg-white {
+div.bg-white,
+nav.bg-white {
     background-color: #222222 !important;
 }
 
