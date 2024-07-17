@@ -141,13 +141,14 @@ function show_da_grades_in_front_of_activity() {
                         const graded = doc.querySelector(selector);
 
                         if (graded) {
-                            let status = [""];
+                            let status = graded.textContent;
                             if (isQuiz) {
-                                status = graded.textContent.split(" ").pop();
-
-                                status = status
-                                    .substring(0, status.length - 1)
-                                    .split("/");
+                                const pattern = /(\d+\.\d+)\s*\/\s*(\d+\.\d+)/g;
+                                const matches = [...status.matchAll(pattern)];
+                                status = [
+                                    matches[0][1] || 0,
+                                    matches[0][2] || 0,
+                                ];
                             } else {
                                 status = graded.textContent
                                     .replace(/\u00A0/g, "")
