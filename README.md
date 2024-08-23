@@ -1,3 +1,8 @@
+# UPDATE ⚡️
+
+They decided to finally update the UI, can you believe that 😍
+But, with the new UI, there's still no dark mode! It's going to take some time to redo the resets again. Which is why, currently I've unpubished the extension from the store. I'll republish it as soon as it's ready 🫶🏻
+
 # UOG LMS Beauty Parlour
 
 Enable dark mode for UOG LMS to go easy on your eyes while checking your attendance and other stuff like seeing the instructor's email so that you can contact them to resolve the attendance problem.
