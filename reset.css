@@ -1,0 +1,25 @@
+html {
+  visibility: hidden;
+}
+
+tr,
+th {
+  background-color: #181818 !important;
+}
+
+:hover:is(tr, th) {
+  background-color: #202020 !important;
+}
+
+.stretched-link::after {
+  background-color: transparent !important;
+}
+
+.dropdown-menu {
+  border: 1px solid #666 !important;
+}
+
+body.pagelayout-login #page {
+  background-image: none !important;
+  background: linear-gradient(135deg, #181818 0%, #303030 100%) !important;
+}
