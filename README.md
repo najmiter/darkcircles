@@ -1,7 +1,6 @@
 # UPDATE ⚡️
 
-They decided to finally update the UI, can you believe that 😍
-And so did we!
+They decided to finally update the UI. And so did we!
 
 > [!NOTE]
 > The previews below are from the legacy version
