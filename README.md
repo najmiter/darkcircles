@@ -1,7 +1,10 @@
 # UPDATE ⚡️
 
 They decided to finally update the UI, can you believe that 😍
-But, with the new UI, there's still no dark mode! It's going to take some time to redo the resets again. Which is why, currently I've unpubished the extension from the store. I'll republish it as soon as it's ready 🫶🏻
+And so did we!
+
+> [!NOTE]
+> The previews below are from the legacy version
 
 # UOG LMS Beauty Parlour
 
